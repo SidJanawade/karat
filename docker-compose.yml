@@ -1,0 +1,13 @@
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      KARATMATCH_GOLD_RATE_24K_INR: "9500"
+      KARATMATCH_DATA_DIR: /app/data
+    volumes:
+      - karatmatch-data:/app/data
+
+volumes:
+  karatmatch-data:

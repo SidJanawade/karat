@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "karatmatch"
+version = "0.1.0"
+description = "Multimodal jewellery catalog intelligence: visual search, attributes, inventory matching."
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Siddhanth Janawade" }]
+dependencies = [
+  "fastapi>=0.115",
+  "uvicorn[standard]>=0.32",
+  "pydantic>=2.9",
+  "pydantic-settings>=2.6",
+  "numpy>=2.0",
+  "pillow>=11.0",
+  "python-multipart>=0.0.12",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.3", "httpx>=0.27", "ruff>=0.7"]
+
+[project.scripts]
+karatmatch-seed = "karatmatch.seed:main"
+karatmatch-eval = "karatmatch.evals:main"
+
+[tool.setuptools.packages.find]
+include = ["karatmatch*"]
+
+[tool.setuptools.package-data]
+karatmatch = ["static/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]

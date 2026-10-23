@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>KaratMatch — jewellery catalog intelligence</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="grain"></div>
+    <header>
+      <div class="brand">
+        <span class="mark">◆</span>
+        <div>
+          <strong>KaratMatch</strong>
+          <p>Catalog intelligence for jewellery commerce</p>
+        </div>
+      </div>
+      <nav>
+        <button class="tab active" data-view="shop">Boutique</button>
+        <button class="tab" data-view="ops">Atelier ops</button>
+      </nav>
+      <div class="rate" id="rate">24K · loading</div>
+    </header>
+
+    <main>
+      <section id="shop" class="view">
+        <div class="hero">
+          <h1>Find the piece, not the keyword.</h1>
+          <p>
+            Shop by photo, vernacular query, metal, and budget. Inventory matching
+            uses the same index the storefront does.
+          </p>
+        </div>
+        <form id="search-form" class="search">
+          <input
+            name="q"
+            placeholder='Try “22k temple jhumkas under 25000 for wedding”'
+            autocomplete="off"
+          />
+          <label class="file">
+            Photo
+            <input type="file" name="image" accept="image/*" />
+          </label>
+          <label class="stock">
+            <input type="checkbox" name="in_stock_only" />
+            In stock
+          </label>
+          <button type="submit">Search</button>
+        </form>
+        <p class="hint" id="filters-hint"></p>
+        <div class="grid" id="grid"></div>
+      </section>
+
+      <section id="ops" class="view hidden">
+        <div class="ops-grid">
+          <article>
+            <h2>Quote desk</h2>
+            <form id="quote-form" class="quote">
+              <label>Weight (g) <input name="weight_grams" type="number" step="0.01" value="8.4" /></label>
+              <label>
+                Metal
+                <select name="metal">
+                  <option>gold</option>
+                  <option>rose_gold</option>
+                  <option>white_gold</option>
+                  <option>silver</option>
+                  <option>platinum</option>
+                </select>
+              </label>
+              <label>
+                Purity
+                <select name="purity">
+                  <option>22k</option>
+                  <option>18k</option>
+                  <option>14k</option>
+                  <option>925</option>
+                </select>
+              </label>
+              <label>Making % <input name="making_charge_pct" type="number" step="0.1" value="12" /></label>
+              <button type="submit">Quote</button>
+            </form>
+            <pre id="quote-out" class="panel"></pre>
+          </article>
+          <article>
+            <h2>Duplicate SKUs</h2>
+            <p class="muted">Same design, two vendor listings. Merge before the site double-sells.</p>
+            <div id="dups" class="stack"></div>
+          </article>
+          <article>
+            <h2>Listing gaps</h2>
+            <div id="gaps" class="stack"></div>
+          </article>
+          <article>
+            <h2>Eval gate</h2>
+            <p class="muted">Run <code>python -m karatmatch.evals</code> to refresh.</p>
+            <pre id="metrics" class="panel">No report yet.</pre>
+          </article>
+        </div>
+      </section>
+    </main>
+    <footer>
+      KaratMatch does not certify stones or purity. It matches catalogue identity and quotes metal + making.
+    </footer>
+    <script src="/app.js"></script>
+  </body>
+</html>
